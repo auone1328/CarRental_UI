@@ -2,6 +2,7 @@ import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Context} from "../main.jsx"
 import {observer} from "mobx-react"
+import { Link } from 'react-router'
 
 const LoginPage = observer(() => {
     const [error, setError] = useState('');
@@ -98,7 +99,7 @@ const LoginPage = observer(() => {
                                 }
                             }                       
                         }}
-                        type="submit"
+                        type="button"
                         disabled={auth.isLoading}
                         className={`group relative w-full flex justify-center rounded-md py-2 px-4 border border-transparent text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 ${auth.isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
                         >
@@ -118,9 +119,9 @@ const LoginPage = observer(() => {
                 <div className="text-center">
                     <p className="text-sm text-gray-600">
                         Еще нет аккаунта?{' '}
-                        <a href="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+                        <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
                         Зарегистрироваться
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>

@@ -5,11 +5,13 @@ import React, {createContext} from 'react';
 import './index.css'
 import App from './App.jsx'
 import LoginPage from './components/LoginPage.jsx'
+import RegisterPage from './components/RegisterPage.jsx'
 import AuthStore from './Auth/AuthStore.js'
 
 const router = createBrowserRouter([
   {path: "/", element: <App/>},
-  {path: "/login", element: <LoginPage/>}
+  {path: "/login", element: <LoginPage/>},
+  {path: "/register", element: <RegisterPage/>}
 ])
 
 export const auth = new AuthStore();
@@ -20,8 +22,6 @@ export const Context = createContext({
 
 createRoot(document.getElementById('root')).render(
   <Context.Provider value={{auth}}>
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>
+    <RouterProvider router={router} />
   </Context.Provider>
 )

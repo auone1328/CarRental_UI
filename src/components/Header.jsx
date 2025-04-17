@@ -13,7 +13,11 @@ export default function Header(){
             {
                 !auth.isAuth ?
                 <div className="d-flex" role="button">
-                    <button className="btn btn-outline-danger" style={{margin: 5}}>Регистрация</button>
+                    <button className="btn btn-outline-danger" 
+                            style={{margin: 5}}
+                            onClick={() => navigate("/register")}>
+                        Регистрация
+                    </button>
                     <button className="btn btn-danger" 
                             style={{margin: 5}} 
                             onClick={() => navigate("/login")}>
