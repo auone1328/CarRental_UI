@@ -5,6 +5,7 @@ import { API_URL } from "../http/index";
 
 export default class AuthStore {
     isAuth = false;
+    isRegisterSucceed = false;
     isLoading = false;
 
     constructor() {
@@ -13,6 +14,10 @@ export default class AuthStore {
 
     setAuth(bool) {
         this.isAuth = bool;
+    }
+
+    setRegisterSucceed(bool) {
+        this.isRegisterSucceed = bool;
     }
 
     setUser(user) {
@@ -37,13 +42,26 @@ export default class AuthStore {
         }
     }
 
-    async checkAuth() {
+    async register(firstName, lastName, patronymic, email, password) {
         this.setLoading(true);
         try {
+            const response = await AuthService.register(firstName, lastName, patronymic, email, password)
+            console.log(response)
+            this.setRegisterSucceed(true)
+        } catch (e) {
+            console.log(e.response?.data)
+        } finally {
+            this.setLoading(false)
+        }
+    }
+
+    async checkAuth() {
+        this.setLoading(true);
+        try {   
             const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
             console.log(response);  
             localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
+            this.setAuth(true); 
         } catch (e) {
             console.log(e.response?.data?.message); 
         } finally {
