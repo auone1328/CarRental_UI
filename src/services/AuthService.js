@@ -8,4 +8,26 @@ export default class AuthService {
     static async register(firstName, lastName, patronymic, email, password) {
         return $api.post('/register', {FirstName: firstName, LastName: lastName, Patronymic: patronymic, Email: email, Password: password})
     }
+
+    static getRolesFromToken = (jwt) => {
+        try {
+            if (!jwt) return [];
+          
+            // Декодируем JWT
+            let jwtData = jwt.split('.')[1]
+            let decodedJwtJsonData = window.atob(jwtData)
+            
+            const decoded = JSON.parse(decodedJwtJsonData);
+                    
+            // Стандартный claim для роли
+            const roleClaimType = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
+    
+            // Получаем роль
+            return decoded[roleClaimType] || null;
+        }
+        catch (e) {
+            console.error('Error decoding token:', e);
+            return [];
+        }  
+    }   
 }

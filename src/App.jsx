@@ -21,7 +21,7 @@ function App() {
   return (
     <>    
       <Header/>  
-      {auth.isAuth ? <p>АВТОРИЗОВАН</p> : <p>НЕ АВТОРИЗОВАН</p>}
+      {auth.isAuth && auth.hasRole("admin") ? <p>АВТОРИЗОВАН</p> : <p>НЕ АВТОРИЗОВАН</p>}
     </>
   )
 }
