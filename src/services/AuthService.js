@@ -30,4 +30,22 @@ export default class AuthService {
             return [];
         }  
     }   
+
+    static getUserIdFromToken = (jwt) => {
+        try {
+            if (!jwt) return [];
+          
+            // Декодируем JWT
+            let jwtData = jwt.split('.')[1]
+            let decodedJwtJsonData = window.atob(jwtData)
+            
+            const decoded = JSON.parse(decodedJwtJsonData);
+                    
+            return decoded.userId || decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+        }
+        catch (e) {
+            console.error('Error decoding token:', e);
+            return [];
+        }  
+    }   
 }

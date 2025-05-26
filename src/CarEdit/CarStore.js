@@ -15,6 +15,7 @@ export default class CarStore {
         this.carCardsData = structuredClone(data)
     }
 
+
     setLoading(bool) {
         this.isLoading = bool;
     }
@@ -24,13 +25,16 @@ export default class CarStore {
     }
 
     async addCar(formData) {
-        this.setLoading(true);
+        this.setLoading(true);  
+        this.setSuccess(false)
         try {
             const response = await CarService.addCar(formData)
             this.setCarCardsData(response.data)  
             this.setSuccess(true)
         } catch (e) {
-            console.log(e.response?.data)
+            console.log(this.isSuccessful)
+            this.setSuccess(false)
+            console.log(e.response?.data)    
         } finally {
             this.setLoading(false)
         }
@@ -44,6 +48,7 @@ export default class CarStore {
             this.setCarCardsData(response.data)  
         } catch (e) {   
             console.log(e.response?.data)
+            this.setSuccess(false)
         } finally {
             this.setLoading(false)
         }
@@ -56,7 +61,8 @@ export default class CarStore {
             this.setSuccess(true)
             this.setCarCardsData(response.data)  
         } catch (e) {   
-            console.log(e.response?.data)
+            this.setSuccess(false)
+            console.log(e.response?.data)      
         } finally {
             this.setLoading(false)
         }
@@ -64,12 +70,14 @@ export default class CarStore {
 
     async updateCar(formData) {
         this.setLoading(true);
+        this.setSuccess(false)
         try {
             const response = await CarService.updateCar(formData)
             this.setCarCardsData(response.data)  
             this.setSuccess(true)
         } catch (e) {
             console.log(e.response?.data)
+            this.setSuccess(false)
         } finally {
             this.setLoading(false)
         }

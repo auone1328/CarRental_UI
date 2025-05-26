@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function CarHeader( { headerText } ){
+export default function CarHeader( { headerText, previous = "/"} ){
     const navigate = useNavigate()
 
     return (
@@ -13,7 +13,7 @@ export default function CarHeader( { headerText } ){
                     <div className="d-flex" role="button">
                         <button className="btn btn-outline-danger" 
                                 style={{margin: 5}}
-                                onClick={() => navigate("/admin")}>
+                                onClick={() => navigate(previous)}>
                             Назад
                         </button>           
                     </div> 

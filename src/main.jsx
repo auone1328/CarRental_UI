@@ -11,6 +11,13 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import CarForm from './components/Admin/CarEdit/CarForm.jsx'
 import CarStore from './CarEdit/CarStore.js'
 import CarInfo from './components/Admin/CarEdit/CarInfo.jsx'
+import Departments from './components/Admin/Department/Departments.jsx'
+import DepartmentsEdit from './components/Admin/Department/DepartmentsEdit.jsx'
+import Rents from './components/Admin/Rent/Rents.jsx'
+import AddPenalty from './components/Admin/Rent/Penalty.jsx'
+import MechanicForm from './components/Mechanic/MechanicForm.jsx'
+import RentsForUsers from './components/RentsForUsers.jsx'
+import ServicePage from './components/Mechanic/ServicePage.jsx'
 
 const router = createBrowserRouter([
   {path: "/", element: <App/>},
@@ -30,7 +37,50 @@ const router = createBrowserRouter([
         <CarForm/>
       </ProtectedRoute>
   )},
+  {
+    path: "/departments", 
+    element: (
+      <ProtectedRoute requiredRole="admin">
+        <Departments/>
+      </ProtectedRoute>
+  )},
+  {
+    path: "/departments_edit", 
+    element: (
+      <ProtectedRoute requiredRole="admin">
+        <DepartmentsEdit/>
+      </ProtectedRoute>
+  )},
+  {
+    path: "/rents", 
+    element: (
+      <ProtectedRoute requiredRole="admin">
+        <Rents/>
+      </ProtectedRoute>
+  )},
+  {
+    path: "/service", 
+    element: (
+      <ProtectedRoute requiredRole="mechanic">
+        <ServicePage/>
+      </ProtectedRoute>
+  )},
+  {
+    path: "/maintenance", 
+    element: (
+      <ProtectedRoute requiredRole="mechanic">
+        <MechanicForm/>
+      </ProtectedRoute>
+  )},
+  {
+    path: "/penalty", 
+    element: (
+      <ProtectedRoute requiredRole="admin">
+        <AddPenalty/>
+      </ProtectedRoute>
+  )},
   {path: "/car_info", element: <CarInfo/>},
+  {path: "/user_rents", element: <RentsForUsers/>}
 ])
 
 export const auth = new AuthStore();

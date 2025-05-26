@@ -8,11 +8,13 @@ export default function Header(){
     const [accountMenuActive, setAccountMenuActive] = useState(false) 
     const {auth} = useContext(Context);
     const accountMenuItems = [{value: "Админ панель", href: "/admin", requiredRole: "admin"},
-                                {value: "Аренды", href: "/rents", requiredRole: "user"}]
+                                {value: "Аренды", href: "/user_rents", requiredRole: "user"},
+                                {value: "Сервис", href: "/service", requiredRole: "mechanic"}
+                            ]
 
     return (
     <>
-        <nav className="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">    
+        <nav className="navbar bg-dark border-bottom border-bottom-dark fixed-top" data-bs-theme="dark">    
             <div className="container-fluid">
                 <a className="navbar-brand select-none">Аренда автомобилей</a>
                 {

@@ -5,6 +5,7 @@ import CarHeader from "./CarHeader"
 import FormInput from "./FormInput"
 import "./Car.css"
 import CarService from "../../../services/CarService"
+import $api from "../../../http";
 import {observer} from "mobx-react"
 import { CarContext } from "../../../main"
 
@@ -26,7 +27,7 @@ function base64ToFile(base64String, filename, mimeType) {
     }
     
     // Создаем Blob и затем File
-    const blob = new Blob(byteArrays, { type: mimeType });
+    const blob = new Blob(byteArrays, { type: mimeType });  
     return new File([blob], filename, { type: mimeType });
   }
 
@@ -34,7 +35,7 @@ function base64ToFile(base64String, filename, mimeType) {
 const defaultCarData = {
     vinCode: "", brand: "", model: "", releaseYear: "", enginePower: "", 
     engineVolume: "", engineType: "", transmissionType: "", 
-    seatsNumber: "", drive: "", cost: "", licensePlate: "", image: null, imageTitle: ""
+    seatsNumber: "", drive: "", cost: "", licensePlate: "", image: null, imageTitle: "", departmentId: ""
 };
 
 function CarForm() {
@@ -51,6 +52,7 @@ function CarForm() {
 
     const [error, setError] = useState('');
     const [isImageEdit, setIsImageEdited] = useState(isEdit)
+    const [departments, setDepartments] = useState([]);
 
     const [vinCode, setVinCode] = useState(carData.vinCode.toString());
     const [brand, setBrand] = useState(carData.brand.toString());
@@ -64,7 +66,7 @@ function CarForm() {
     const [drive, setDrive] = useState(carData.drive.toString());
     const [cost, setCost] = useState(carData.cost.toString());
     const [licensePlate, setLicensePlate] = useState(carData.licensePlate.toString())
-
+    const [departmentId, setDepartmentId] = useState(carData.departmentId.toString())
     //для добавления изображения авто
     const [isDragging, setIsDragging] = useState(false);
     const [file, setFile] = useState(carData.data);
@@ -77,6 +79,18 @@ function CarForm() {
           }
         };
     }, [file]);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await $api.get(`/get_dep`)
+                setDepartments(response.data)
+            } catch (err) {
+                setError(`Ошибка при получении данных: ${err}`)
+            }
+        };
+        getData();      
+    }, [])
 
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -127,7 +141,7 @@ function CarForm() {
 
     return (
         <>
-            <CarHeader headerText={"Админ-панель"}/>    
+            <CarHeader headerText={"Админ-панель"} previous={"/admin"}/>    
             <main className="block text-center"> 
                 <div className="m-3 text-center justify-center items-center">
                     <h1>{header} объявления</h1>  
@@ -148,12 +162,72 @@ function CarForm() {
                             <FormInput inputId={"year"} type={"number"} placeHolder={"Год выпуска"} value={year} setValue={setYear}/>     
                             <FormInput inputId={"enginePower"} type={"number"} placeHolder={"Мощность двигателя"} value={enginePower} setValue={setEnginePower}/>      
                             <FormInput inputId={"engineVolume"} type={"text"} placeHolder={"Объём двигателя"} value={engineVolume} setValue={setEngineVolume}/>    
-                            <FormInput inputId={"engineType"} type={"text"} placeHolder={"Тип двигателя"} value={engineType} setValue={setEngineType}/>
-                            <FormInput inputId={"transmissionType"} type={"text"} placeHolder={"Тип трансмиссии"} value={transmissionType} setValue={setTransmissionType}/>
+                            <select 
+                                className={`${!engineType ? "text-gray-500" : ""} m-2 rounded-none relative block w-[98%] px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-xl focus:outline-none! focus:ring-red-500! focus:border-red-500! focus:z-10!`}
+                                value={engineType}
+                                onChange={(e) => setEngineType(e.target.value)}
+                            >
+                                <option value="" disabled hidden>Тип двигателя</option>
+                                
+                                <option value={"Бензиновый"}>
+                                    Бензиновый  
+                                </option>
+                                <option value={"Дизельный"}>
+                                    Дизельный
+                                </option>                   
+                            </select> 
+                            <select 
+                                className={`${!transmissionType ? "text-gray-500" : ""} m-2 rounded-none relative block w-[98%] px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-xl focus:outline-none! focus:ring-red-500! focus:border-red-500! focus:z-10!`}
+                                value={transmissionType}
+                                onChange={(e) => setTransmissionType(e.target.value)}
+                            >
+                                <option value="" disabled hidden>Тип трансмиссии</option>
+                                
+                                <option value={"Автомат"}>
+                                    Автомат  
+                                </option>
+                                <option value={"Вариатор"}>
+                                    Вариатор
+                                </option>              
+                                <option value={"Робот"}>
+                                    Робот
+                                </option>        
+                                <option value={"Механика"}>
+                                    Механика
+                                </option>    
+                            </select> 
                             <FormInput inputId={"seatsNumber"} type={"number"} placeHolder={"Количество сидений"} value={seatsNumber} setValue={setSeatsNumber}/>
-                            <FormInput inputId={"drive"} type={"text"} placeHolder={"Привод"} value={drive} setValue={setDrive}/>
+                            <select 
+                                className={`${!drive ? "text-gray-500" : ""} m-2 rounded-none relative block w-[98%] px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-xl focus:outline-none! focus:ring-red-500! focus:border-red-500! focus:z-10!`}
+                                value={drive}
+                                onChange={(e) => setDrive(e.target.value)}
+                            >
+                                <option value="" disabled hidden>Привод</option>
+                                
+                                <option value={"Полный"}>
+                                    Полный  
+                                </option>
+                                <option value={"Задний"}>
+                                    Задний
+                                </option>              
+                                <option value={"Передний"}>
+                                    Передний
+                                </option>        
+                            </select> 
                             <FormInput inputId={"cost"} type={"number"} placeHolder={"Стоимость"} value={cost} setValue={setCost}/>
-                            <FormInput inputId={"licensePlate"} type={"text"} placeHolder={"Регистрационный номер"} value={licensePlate} setValue={setLicensePlate}/>   
+                            <FormInput inputId={"licensePlate"} type={"text"} placeHolder={"Регистрационный номер"} value={licensePlate} setValue={setLicensePlate}/> 
+                            <select 
+                                className={`${!departmentId ? "text-gray-500" : ""} m-2 rounded-none relative block w-[98%] px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-xl focus:outline-none! focus:ring-red-500! focus:border-red-500! focus:z-10!`}
+                                value={departmentId}
+                                onChange={(e) => setDepartmentId(e.target.value)}
+                            >
+                                <option value="" disabled hidden>Подразделение</option>
+                                {departments.map(option => (
+                                    <option key={option.departmentId} value={option.departmentId}>
+                                        {option.address}
+                                    </option>
+                                ))}
+                            </select>  
                             {/*drag&drop изображение*/}
                             <div className="file-drop-container">
                                 <input  
@@ -225,9 +299,18 @@ function CarForm() {
                                                 cost.trim(),
                                                 licensePlate.trim(),
                                                 baseToFile ?? file,
-                                                (isEdit && isImageEdit) ? carData.title : file.name]
-
-                                    if (states.some((elem) => !elem)) {
+                                                (isEdit && isImageEdit) ? carData.title : file.name,
+                                                departmentId]
+                                    const carNumberRegex = /^[АВЕКМНОРСТУХA-Z]\d{3}[АВЕКМНОРСТУХA-Z]{2}\d{2,3}$/i;
+                                    const engineVolumeRegex = /^\d{1,2}\.\d{1,2}$/;
+                                    
+                                    if (engineVolumeRegex.test(engineVolume)) {
+                                        setError('Неправильный формат объёма двигателя!')
+                                    }
+                                    else if (carNumberRegex.test(licensePlate)) {
+                                        setError('Неправильный формат регистрационного номера!')
+                                    }
+                                    else if (states.some((elem) => !elem)) {
                                         setError('Заполните все поля!')
                                     } 
                                     else {
@@ -236,13 +319,13 @@ function CarForm() {
                                         const [ 
                                             VinCode, Brand, Model, ReleaseYear, EnginePower, 
                                             EngineVolume, EngineType, TransmissionType, 
-                                            SeatsNumber, Drive, Cost, LicensePlate, Image, ImageTitle
+                                            SeatsNumber, Drive, Cost, LicensePlate, Image, ImageTitle, DepartmentId
                                         ] = states;
                                         
                                         const car = {
                                             VinCode, Brand, Model, ReleaseYear, EnginePower, 
                                             EngineVolume, EngineType, TransmissionType, 
-                                            SeatsNumber, Drive, Cost, LicensePlate, Image, ImageTitle
+                                            SeatsNumber, Drive, Cost, LicensePlate, Image, ImageTitle, DepartmentId
                                         };
 
                                         const formData = new FormData();
@@ -250,7 +333,8 @@ function CarForm() {
                                             formData.append(key, car[key]);
                                         }
 
-                                        await !isEdit ? carEdit.addCar(formData) : carEdit.updateCar(formData)
+                                        (!isEdit) ? await carEdit.addCar(formData) : await carEdit.updateCar(formData)
+                                        console.log(carEdit.isSuccessful)
                                         if (carEdit.isSuccessful) {
                                             navigate("/admin")
                                         }

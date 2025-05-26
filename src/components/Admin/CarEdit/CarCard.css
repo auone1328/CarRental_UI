@@ -2,6 +2,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 5px -3px rgba(193, 5, 32, 0.5);
+    z-index: 0;
 }
 
 .car-card:hover {
@@ -40,4 +41,13 @@
 
 .btn-danger:active {
     transform: scale(0.9);
+}
+
+.warning-icon {
+    top: -5px;
+    right: -5px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    fill: rgba(193, 5, 32);
 }

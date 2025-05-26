@@ -28,4 +28,8 @@ export default class CarService {
             }
         })
     }
+
+    static async getDepartments() {
+        return await $api.get(`/get_dep`)
+    }
 }

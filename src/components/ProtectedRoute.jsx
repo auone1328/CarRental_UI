@@ -26,7 +26,7 @@ const ProtectedRoute = observer(({ children, requiredRole }) => {
     }
 
     if (!auth.hasRole(requiredRole)) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/not_found" replace />;
     }
   
     return children;

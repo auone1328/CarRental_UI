@@ -6,6 +6,7 @@
     left: 0;
     transform: translateX(230%);
     transition: all 0.2s;
+    z-index: 1;
 }
 
 .menu.active {
@@ -13,7 +14,7 @@
 }
 
 .menu_content {
-    width: 10%;
+    width: 12%;
     height: 100%;
     background-color: rgba(33, 37, 41);
     display: flex;
