@@ -1,0 +1,35 @@
+.departments-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.departments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.departments-table th, 
+.departments-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.departments-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.departments-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+

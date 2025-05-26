@@ -1,0 +1,28 @@
+.booking-success {
+    text-align: center;
+    padding: 20px;
+}
+
+.success-icon {
+    font-size: 48px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.booking-success h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.booking-details {
+    text-align: left;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.booking-details p {
+    margin: 10px 0;
+    line-height: 1.6;
+}

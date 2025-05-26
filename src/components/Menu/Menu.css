@@ -1,0 +1,75 @@
+.menu {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 65px;
+    left: 0;
+    transform: translateX(230%);
+    transition: all 0.2s;
+    z-index: 1;
+}
+
+.menu.active {
+    transform: translateX(0)
+}
+
+.menu_content {
+    width: 12%;
+    height: 100%;
+    background-color: rgba(33, 37, 41);
+    display: flex;
+    position: absolute;
+    right: 0;
+    flex-direction: column;
+    align-items: left;    
+    transition: all 0.4s;
+}
+
+.menu_header {
+    padding: 10px;
+    font-size: 2rem;
+    color: white;
+    border-bottom: 1px solid rgba(193, 5, 32);
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    user-select: none; 
+}
+
+ul {
+    display: flex;
+    text-align: justify;
+    flex-direction: column;
+    align-items: left;
+    padding: 0;
+    margin: 0; 
+    user-select: none; 
+}
+
+ul li {
+    display: block;
+    align-items: left;
+    margin: 2px 0;
+}
+
+.menu_button {
+    width: 100%;
+    padding: 8px;
+    background: rgba(33, 37, 41);
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 5px -3px rgba(193, 5, 32, 0.5);
+}
+
+.menu_button:hover {
+    background-color: rgba(193, 5, 32);
+    box-shadow: 0 5px 5px -3px rgba(193, 5, 32, 0.8);
+    transform: translateY(-2px); 
+}
+
+.account-btn:active {
+    filter: brightness(0.7);
+}

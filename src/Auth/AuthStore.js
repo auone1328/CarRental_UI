@@ -7,6 +7,7 @@ export default class AuthStore {
     isAuth = false;
     isRegisterSucceed = false;
     isLoading = false;
+    roles = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -19,13 +20,17 @@ export default class AuthStore {
     setRegisterSucceed(bool) {
         this.isRegisterSucceed = bool;
     }
-
-    setUser(user) {
-        this.user = user;
+    
+    setRoles(token) {
+        this.roles = (AuthService.getRolesFromToken(token)).toLowerCase()
     }
 
     setLoading(bool) {
         this.isLoading = bool;
+    }
+
+    hasRole(requiredRole) {
+        return this.roles?.includes(requiredRole.toLowerCase());
     }
 
     async login(email, password) {
@@ -35,6 +40,7 @@ export default class AuthStore {
             console.log(response)
             localStorage.setItem('token', response.data.accessToken)
             this.setAuth(true)
+            this.setRoles(response.data.accessToken)
         } catch (e) {
             console.log(e.response?.data)
         } finally {
@@ -62,6 +68,7 @@ export default class AuthStore {
             console.log(response);  
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true); 
+            this.setRoles(response.data.accessToken)
         } catch (e) {
             console.log(e.response?.data?.message); 
         } finally {
