@@ -1,7 +1,7 @@
 # React + Vite
 
 <h1>Информационная система для учёта проката автомобилей (UI)</h1>
-Веб-приложение, написано с использованием ASP.NET Core + React JS. [Сервер/API](https://github.com/auone1328/Car-Rental)
+Веб-приложение, написано с использованием ASP.NET Core + React JS. <a href = "https://github.com/auone1328/Car-Rental">Сервер/API</a>
 
 Страница регистрации:
 <img width="974" height="893" alt="image" src="https://github.com/user-attachments/assets/711927fd-1499-47bd-b6e0-d1b755df1fe1" />
