@@ -25,10 +25,10 @@
 <img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/3fe5f42c-9ff3-46a5-9dee-64726acb36a4" />
 
 <h3>Страница добавления автомобиля:</h3>
-<img width="700" height="600" alt="image" src="https://github.com/user-attachments/assets/45cdf176-e454-49a0-9650-77b20411fb8a" />
+<img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/45cdf176-e454-49a0-9650-77b20411fb8a" />
 
 <h3>Страница редактирования данных об автомобиле:</h3>
-<img width="700" height="600" alt="image" src="https://github.com/user-attachments/assets/ad229087-9c6b-4719-87a3-1dc21fb10cb3" />
+<img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/ad229087-9c6b-4719-87a3-1dc21fb10cb3" />
 
 <h3>Страница просмотра подразделений:</h3>
 <img width="700" height="600" src="https://github.com/user-attachments/assets/46af9ac5-13ab-4ab5-a03c-6a034d7f3cdd" />
