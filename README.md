@@ -4,7 +4,6 @@
 Веб-приложение, написано с использованием ASP.NET Core + React JS. <a href = "https://github.com/auone1328/Car-Rental">Сервер/API</a>
 
 <h3>Страница регистрации:</h3>
-<br/>
 <img width="700" height="600" alt="image" src="https://github.com/user-attachments/assets/711927fd-1499-47bd-b6e0-d1b755df1fe1" />
 
 <h3>Страница входа:</h3>
